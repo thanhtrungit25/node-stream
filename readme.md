@@ -66,3 +66,9 @@ $ npm run start
 Go to Settings > Stream.  Select Custom service and `rtmp://127.0.0.1:1935/live`
 in server input. Enter your streaming key issued by NodeStream and click Apply.
 Click start streaming to broadcast your stream.
+
+![alt text](https://github.com/thanhtrungit25/node-stream/blob/master/live_streams.png "live streams")
+![alt text](https://github.com/thanhtrungit25/node-stream/blob/master/stream.png "stream")
+
+### references
+https://github.com/waleedahmad/node-stream
