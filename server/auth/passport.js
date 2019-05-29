@@ -1,6 +1,7 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const User = require('../database/Schema').User;
+const shortid = require('shortid');
 
 passport.serializeUser(function(user, cb) {
   cb(null, user);
@@ -11,6 +12,7 @@ passport.deserializeUser(function(obj, cb) {
 });
 
 passport.use(
+  'localRegister',
   new LocalStrategy(
     {
       usernameField: 'email',
@@ -32,14 +34,14 @@ passport.use(
 
             return done(null, false);
           } else {
-            let newUser = new User();
-            newUser.email = email;
-            newUser.password = newUser.generateHash(password);
-            newUser.username = req.body.username;
-            newUser.stream_token = '';
-            newUser.save(function(err) {
+            let user = new User();
+            user.email = email;
+            user.password = user.generateHash(password);
+            user.username = req.body.username;
+            user.stream_key = shortid.generate();
+            user.save(function(err) {
               if (err) throw err;
-              return done(null, newUser);
+              return done(null, user);
             });
           }
         }
